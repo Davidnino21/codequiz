@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container-1">
+
+        <div class="bar-container">
+            <button>View Highscores</button>
+            <p id="timer">Timer: 60</p>
+        </div>
+
+        <div class="container-2">
+
+            <header class="quiz-header">
+                <h1>Coding Quiz Challenge</h1>
+                <p>
+                    Try to answer the following code related questions within the time limit. Keep in mind that
+                    inccorect answers will penalize you scoretime by ten seconds!
+                </p>
+                <button id="startBtn">Start Quiz</button>
+            </header>
+
+            <main>
+                <section class="questions-display">
+                    <h2>Question</h2>
+                    <ul id="answers">
+                        <li><button>Answer1</button></li>
+                        <li><button>Answer2</button></li>
+                        <li><button>Answer3</button></li>
+                        <li><button>Answer4</button></li>
+                    </ul>
+                </section>
+
+                <section class="finish-screen">
+                    <h2>Quiz Finished!</h2>
+                    <h2>Your final score is: 00</h2>
+                    <div>
+                        <label for="">Enter Initials:</label>
+                        <input type="text">
+                        <button id="submitBtn">Submit</button>
+                    </div>
+                </section>
+
+
+                <section class="highscores">
+                    <h2>Highscores:</h2>
+                    <ol>
+                        <li>DN - 10</li>
+                        <li>DN - 10</li>
+                        <li>DN - 10</li>
+                    </ol>
+
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
