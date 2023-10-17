@@ -13,8 +13,8 @@
     <div class="container-1">
 
         <div class="bar-container">
-            <button>View Highscores</button>
-            <p id="timer">Timer: 60</p>
+            <button id="view-highscores">View Highscores</button>
+            <p id="timer">Timer: 30</p>
         </div>
 
         <div class="container-2">
@@ -41,7 +41,7 @@
 
                 <section class="finish-screen">
                     <h2>Quiz Finished!</h2>
-                    <h2>Your final score is: 00</h2>
+                    <h2>Your final score is: <span id="scores">00</span></h2>
                     <div>
                         <label for="">Enter Initials:</label>
                         <input type="text">
@@ -51,13 +51,9 @@
 
 
                 <section class="highscores">
+                    <button id="back">Back</button>
                     <h2>Highscores:</h2>
-                    <ol>
-                        <li>DN - 10</li>
-                        <li>DN - 10</li>
-                        <li>DN - 10</li>
-                    </ol>
-
+                    <ol></ol>
                 </section>
             </main>
         </div>

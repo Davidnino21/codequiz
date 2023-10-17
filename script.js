@@ -1,9 +1,10 @@
 var startBtn = document.getElementById("startBtn")
-var submitBtn = document.getElementById("button");
-var highScores = document.getElementsByClassName("highscores");
+var submitBtn = document.getElementById("submitBtn");
+var highScores = document.querySelector(".highscores");
 var timer = document.getElementById("timer");
 var intervalId
 var currentIndex = 0
+var scores = 0
 
 
 var questions = [
@@ -28,9 +29,11 @@ var questions = [
 ]
 
 function startQuiz() {
+    highScores.style.display = "none";
     intervalId = setInterval(startTimer, 1000);
     console.log("Quiz Started!");
     document.querySelector(".quiz-header").style.display = "none";
+    document.querySelector("main").style.display = "block";
     document.querySelector(".questions-display").style.display = "block";
     displayQuiz();
 }
@@ -49,59 +52,98 @@ function displayQuiz() {
 
 function addAnswerClickEvents() {
     var answers = document.querySelector('#answers');
+    var section = document.querySelector(".questions-display");
     answers.addEventListener("click", function (event) {
         if (event.target.tagName === "BUTTON") {
             var selectedAnswer = event.target.textContent.split(' ')[1];
             var correctAnswer = questions[currentIndex].correctAnswer;
             var feedback = document.createElement("p");
+            var hr = document.createElement("hr");
 
             if (correctAnswer === selectedAnswer) {
                 feedback.textContent = "Correct!";
                 feedback.classList.add("correct");
+                scores += 5
             } else {
                 feedback.textContent = "Wrong!";
                 feedback.classList.add("wrong");
+                scores -= 5
+                if (scores < 0) {
+                    scores = 0
+                }
             }
 
-            answers.innerHTML = "";
-            answers.appendChild(feedback);
+            //answers.innerHTML = "";
+            section.appendChild(hr);
+            section.appendChild(feedback);
 
             currentIndex++;
             if (currentIndex < questions.length) {
                 setTimeout(function () {
                     displayQuiz();
-                }, 1000);
+                }, 1200);
             } else {
                 setTimeout(function () {
                     displayFinishScreen();
-                }, 1000);
+                }, 1200);
             }
         }
     });
 }
 
-function displayFinishScreen(score, submitBtn) {
+function displayFinishScreen() {
+    clearInterval(intervalId);
+    document.querySelector(".questions-display").style.display = "none";
+
     var finishScreen = document.querySelector(".finish-screen");
     var initialsInput = finishScreen.querySelector("input[type='text']");
     finishScreen.style.display = "block";
+    document.querySelector("#scores").innerText = scores;
 
 
     submitBtn.addEventListener("click", function (submit) {
         var initials = initialsInput.value;
         console.log("Initials: " + initials);
+        saveTolocalStorage(initials)
     });
 }
 
+function saveTolocalStorage(initials) {
+    const savedScores = JSON.parse(localStorage.getItem("scores")) || []
+    savedScores.push({ initials, scores })
+    localStorage.setItem("scores", JSON.stringify(savedScores))
 
+}
+
+function showHighScores() {
+    clearInterval(intervalId)
+    highScores.style.display = "block";
+    document.querySelector(".questions-display").style.display = "none";
+    var finishScreen = document.querySelector(".finish-screen");
+    finishScreen.style.display = "none"
+    document.querySelector(".quiz-header").style.display = "none";
+    const savedScores = JSON.parse(localStorage.getItem("scores")) || []
+    savedScores.forEach(s => {
+        var li = `<li>${s.initials} - ${s.scores}</li>`
+        document.querySelector(".highscores ol").insertAdjacentHTML("beforeend", li)
+    });
+    document.getElementById("back").addEventListener("click", function (){
+        document.querySelector("main").style.display = "none";
+        document.querySelector(".quiz-header").style.display = "flex";
+    }) 
+    
+}
+document.querySelector("#view-highscores")
+.addEventListener("click", showHighScores)
 
 var countDown = 10
 function startTimer() {
-    timer.textContent = "Timer: " + countDown
     countDown--;
+    timer.textContent = "Timer: " + countDown
 
-
-    if (countDown <= -1) {
-        clearInterval(intervalId);
+    if (countDown <= 0) {
+        displayFinishScreen()
+        //clearInterval(intervalId);
         // displayMessage()
     }
 }
@@ -109,16 +151,3 @@ function startTimer() {
 startBtn.addEventListener("click", startQuiz);
 
 
-/*/Add functionality to handle user answers and check if they are correct or incorrect.
-
-Implement logic to move to the next question after the user answers.
-
-Update the timer to reflect the remaining time for each question.
-
-Add a function to end the quiz when all questions have been answered or the timer reaches 0.
-
-Implement a scoring system to calculate and display the user's score.
-
-Add a form to capture the user's initials and save their score.
-
-Style the quiz interface to make it more visually appealing./*/

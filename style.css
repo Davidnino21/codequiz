@@ -12,16 +12,16 @@ body {
     
 }
 
-
-p {
-    color: white;
-    font-size: 20px;
-    padding-bottom: 5%;
+.container-1 {
+    padding: 25px;
+    height: 100vh;
 }
 
 .bar-container button {
     font-size: 18px;
     background-color: red;
+    padding: 10px;
+    border: none;
     color: white;
 }
 
@@ -29,19 +29,12 @@ p {
     float: right;
 }
 
-.container-1 {
-    padding: 25px;
-    height: 100vh;
-}
-
-
 .container-2 {
     
     height: 100%;
     width: 50%;
     margin: 0 auto;
     padding-top: 6%;
-
 }
 
 .quiz-header {
@@ -50,9 +43,24 @@ p {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: gray;
-    
-    
+    align-items: center;
+    background-color: gray; 
+    padding: 10px;
+}
+
+.quiz-header button {
+    font-size: 25px;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    width: 50%;
+    border: none;
+}
+
+p {
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5%;
 }
 
 main {
@@ -73,28 +81,62 @@ h1, h2 {
     text-align: center;
 }
 
-.quiz-header button {
-    font-size: 25px;
-    background-color: red;
-    color: white;
-    padding: 1%;
-}
-
-main {
-    display: block;
-    
-}
 
 .questions-display {
     display: none;
 }
 
+.questions-display button {
+    padding: 8px;
+    border: none;
+    background-color: yellow;
+    border-radius: 5px;
+}
+
+.questions-display button:hover {
+    background-color: aqua;
+}
+
 .finish-screen {
     display: none;
-    padding: 1%;
+    padding: 10px;
+}
+.finish-screen label, 
+.finish-screen input, 
+.finish-screen button {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.finish-screen button {
+    background-color: aqua;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
 }
 
 .highscores {
     display: none;
+    padding: 15px;
 }
 
+.highscores li {
+    padding: 5px;
+    border-bottom: 1px solid black;
+
+}
+.highscores button {
+    border: none;
+    background-color: aqua;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: tomato;
+}
