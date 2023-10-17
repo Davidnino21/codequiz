@@ -136,7 +136,7 @@ function showHighScores() {
 document.querySelector("#view-highscores")
 .addEventListener("click", showHighScores)
 
-var countDown = 10
+var countDown = 30
 function startTimer() {
     countDown--;
     timer.textContent = "Timer: " + countDown
